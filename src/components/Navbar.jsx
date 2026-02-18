@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import { useI18n } from '../i18n.jsx';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    const { lang, setLang, t } = useI18n();
 
     useEffect(() => {
         if (theme === 'dark') {
@@ -19,11 +21,11 @@ const Navbar = () => {
     };
 
     const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Skills', href: '#skills' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' },
+        { name: t('nav.home'), href: '#home' },
+        { name: t('nav.about'), href: '#about' },
+        { name: t('nav.skills'), href: '#skills' },
+        { name: t('nav.projects'), href: '#projects' },
+        { name: t('nav.contact'), href: '#contact' },
     ];
 
     return (
@@ -31,7 +33,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
-                        <a href="#" className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        <a href="#" className="font-display text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                             Guutale<span className="text-slate-900 dark:text-white">.dev</span>
                         </a>
                     </div>
@@ -47,6 +49,37 @@ const Navbar = () => {
                                     {link.name}
                                 </a>
                             ))}
+
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                                    {t('nav.language')}
+                                </span>
+                                <div className="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/40 p-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setLang('en')}
+                                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${lang === 'en'
+                                            ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                                            }`}
+                                        aria-pressed={lang === 'en'}
+                                    >
+                                        {t('lang.en')}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setLang('so')}
+                                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${lang === 'so'
+                                            ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                                            }`}
+                                        aria-pressed={lang === 'so'}
+                                    >
+                                        {t('lang.so')}
+                                    </button>
+                                </div>
+                            </div>
+
                             <button
                                 onClick={toggleTheme}
                                 className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -59,6 +92,30 @@ const Navbar = () => {
 
                     <div className="md:hidden">
                         <div className="flex items-center space-x-4">
+                            <div className="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/40 p-1">
+                                <button
+                                    type="button"
+                                    onClick={() => setLang('en')}
+                                    className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${lang === 'en'
+                                        ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                                        }`}
+                                    aria-pressed={lang === 'en'}
+                                >
+                                    {t('lang.en')}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setLang('so')}
+                                    className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${lang === 'so'
+                                        ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                                        }`}
+                                    aria-pressed={lang === 'so'}
+                                >
+                                    {t('lang.so')}
+                                </button>
+                            </div>
                             <button
                                 onClick={toggleTheme}
                                 className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

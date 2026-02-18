@@ -13,7 +13,8 @@ export default {
         dark: "#0f172a", // Slate 900
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       }
     },
   },
